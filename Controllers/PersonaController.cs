@@ -29,8 +29,9 @@ namespace persona5apicore.Controllers
           {
               return NotFound();
           }
-            return await _context.Personas.ToListAsync();
+            return await _context.Personas.Include(p => p.DamageEffectiveness).ToListAsync();
         }
+
 
         // GET: api/Persona/5
         [HttpGet("{id}")]
@@ -40,7 +41,7 @@ namespace persona5apicore.Controllers
           {
               return NotFound();
           }
-            var persona = await _context.Personas.FindAsync(id);
+            var persona = await _context.Personas.Include(p => p.DamageEffectiveness).FirstAsync(p => p.Id == id);
 
             if (persona == null)
             {

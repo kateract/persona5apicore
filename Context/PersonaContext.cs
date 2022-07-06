@@ -24,6 +24,14 @@ public class PersonaContext : DbContext
       .HasForeignKey<DamageEffectiveness>(d => d.PersonaId)
       .OnDelete(DeleteBehavior.Cascade);
 
+    modelBuilder.Entity<Persona>()
+      .Property(p => p.Id)
+      .ValueGeneratedOnAdd();
+
+    modelBuilder.Entity<DamageEffectiveness>()
+      .Property(p => p.Id)
+      .ValueGeneratedOnAdd();
+
     modelBuilder.Entity<Question>()
       .HasMany<Answer>(q => q.Answers)
       .WithOne(a => a.Question)
