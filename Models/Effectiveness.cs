@@ -1,5 +1,3 @@
-
-
 namespace Persona5ApiCore.Models;
 
 public class Effectiveness : Enumeration {

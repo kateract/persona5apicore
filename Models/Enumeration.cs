@@ -48,4 +48,8 @@ public abstract class Enumeration : IComparable
     return base.GetHashCode();
   }
   public int CompareTo(object? obj) => Id.CompareTo(((Enumeration?)obj)?.Id);
+  public static T FromString<T>(string value) where T : Enumeration{
+    return GetAll<T>().First(t => t.Name == value);
+  }
 }
+

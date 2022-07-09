@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persona5ApiCore.Context;
@@ -10,7 +5,7 @@ using Persona5ApiCore.Models;
 
 namespace persona5apicore.Controllers
 {
-    [Route("api/[controller]")]
+  [Route("api/[controller]")]
     [ApiController]
     public class QuestionController : ControllerBase
     {
@@ -29,7 +24,7 @@ namespace persona5apicore.Controllers
           {
               return NotFound();
           }
-            return await _context.Questions.ToListAsync();
+            return await _context.Questions.Include(q => q.Answers).ToListAsync();
         }
 
         // GET: api/Question/5
@@ -40,7 +35,7 @@ namespace persona5apicore.Controllers
           {
               return NotFound();
           }
-            var question = await _context.Questions.FindAsync(id);
+            var question = await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(s => s.Id == id);
 
             if (question == null)
             {
